@@ -115,6 +115,14 @@ files (Folder a) =
         (Json.Decode.list (Json.Decode.map File Json.Decode.value))
 
 
+fileById : String -> Task.Task JavaScript.Error (Maybe File)
+fileById a =
+    JavaScript.run
+        "DriveApp.getFileById(a)"
+        (Json.Encode.string a)
+        (Json.Decode.nullable (Json.Decode.map File Json.Decode.value))
+
+
 fileByName : Folder -> String -> Task.Task JavaScript.Error (Maybe File)
 fileByName (Folder a) name =
     JavaScript.run
