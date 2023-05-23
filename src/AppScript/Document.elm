@@ -34,6 +34,14 @@ byId a =
         )
 
 
+create : String -> Task.Task JavaScript.Error Document
+create a =
+    JavaScript.run
+        "DocumentApp.create(a)"
+        (Json.Encode.string a)
+        (Json.Decode.map Document Json.Decode.value)
+
+
 name : Document -> Task.Task JavaScript.Error String
 name (Document a) =
     JavaScript.run
