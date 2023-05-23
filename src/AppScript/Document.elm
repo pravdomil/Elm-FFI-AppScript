@@ -56,3 +56,19 @@ body (Document a) =
         "a.getBody()"
         a
         (Json.Decode.map Body Json.Decode.value)
+
+
+
+--
+
+
+type Element
+    = Element Json.Decode.Value
+
+
+children : Body -> Task.Task JavaScript.Error (List Element)
+children (Body a) =
+    JavaScript.run
+        "(function() { var acc = []; for (var i = 0; i < a.getNumChildren(); i++) acc.push(a.getChild(i)); return acc })()"
+        a
+        (Json.Decode.list (Json.Decode.map Element Json.Decode.value))
