@@ -88,3 +88,19 @@ type_ (Element a) =
         "a.getType().toString()"
         a
         Json.Decode.string
+
+
+
+--
+
+
+type Paragraph
+    = Paragraph Json.Decode.Value
+
+
+text : Paragraph -> Task.Task JavaScript.Error String
+text (Paragraph a) =
+    JavaScript.run
+        "a.getText()"
+        a
+        Json.Decode.string
