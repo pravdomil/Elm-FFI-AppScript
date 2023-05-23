@@ -69,7 +69,7 @@ body (Document a) =
 appendParagraph : Paragraph -> Body -> Task.Task JavaScript.Error ()
 appendParagraph (Paragraph paragraph) (Body a) =
     JavaScript.run
-        "a[1].appendParagraph(a[0]])"
+        "a[1].appendParagraph(a[0])"
         (Json.Encode.list identity [ paragraph, a ])
         (Json.Decode.succeed ())
 
