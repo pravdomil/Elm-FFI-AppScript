@@ -118,6 +118,14 @@ type Paragraph
     = Paragraph Json.Decode.Value
 
 
+detach : Paragraph -> Task.Task JavaScript.Error Paragraph
+detach (Paragraph a) =
+    JavaScript.run
+        "a.copy()"
+        a
+        (Json.Decode.map Paragraph Json.Decode.value)
+
+
 text : Paragraph -> Task.Task JavaScript.Error String
 text (Paragraph a) =
     JavaScript.run
