@@ -50,6 +50,14 @@ name (Document a) =
         Json.Decode.string
 
 
+appendText : String -> Document -> Task.Task JavaScript.Error ()
+appendText text_ (Document a) =
+    JavaScript.run
+        "a[1].editAsText().appendText(a[0])"
+        (Json.Encode.list identity [ Json.Encode.string text_, a ])
+        (Json.Decode.succeed ())
+
+
 
 --
 
