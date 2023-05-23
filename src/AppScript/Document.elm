@@ -124,3 +124,11 @@ text (Paragraph a) =
         "a.getText()"
         a
         Json.Decode.string
+
+
+heading : Paragraph -> Task.Task JavaScript.Error String
+heading (Paragraph a) =
+    JavaScript.run
+        "a.getHeading().toString()"
+        a
+        Json.Decode.string
