@@ -1,0 +1,5 @@
+{
+  "devDependencies": {
+    "elm-ffi": "github:pravdomil/elm-ffi"
+  }
+}
