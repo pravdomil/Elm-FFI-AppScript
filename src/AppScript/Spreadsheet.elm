@@ -26,6 +26,18 @@ active =
         )
 
 
+byId : String -> Task.Task JavaScript.Error (Maybe Spreadsheet)
+byId a =
+    JavaScript.run
+        "SpreadsheetApp.openById(a)"
+        (Json.Encode.string a)
+        (Json.Decode.oneOf
+            [ Json.Decode.null Nothing
+            , Json.Decode.map (Spreadsheet >> Just) Json.Decode.value
+            ]
+        )
+
+
 name : Spreadsheet -> Task.Task JavaScript.Error String
 name (Spreadsheet a) =
     JavaScript.run
