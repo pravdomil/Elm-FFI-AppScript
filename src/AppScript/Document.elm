@@ -20,3 +20,11 @@ active =
             , Json.Decode.map (Document >> Just) Json.Decode.value
             ]
         )
+
+
+name : Document -> Task.Task JavaScript.Error String
+name (Document a) =
+    JavaScript.run
+        "a.getName()"
+        a
+        Json.Decode.string
