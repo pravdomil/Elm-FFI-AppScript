@@ -1,4 +1,5 @@
 {
+  "name": "elm-ffi-appscript",
   "devDependencies": {
     "elm-ffi": "github:pravdomil/elm-ffi"
   }
