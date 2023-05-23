@@ -22,6 +22,18 @@ active =
         )
 
 
+byId : String -> Task.Task JavaScript.Error (Maybe Document)
+byId a =
+    JavaScript.run
+        "DocumentApp.openById(a)"
+        (Json.Encode.string a)
+        (Json.Decode.oneOf
+            [ Json.Decode.null Nothing
+            , Json.Decode.map (Document >> Just) Json.Decode.value
+            ]
+        )
+
+
 name : Document -> Task.Task JavaScript.Error String
 name (Document a) =
     JavaScript.run
