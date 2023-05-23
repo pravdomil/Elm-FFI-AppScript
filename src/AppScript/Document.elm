@@ -72,3 +72,11 @@ children (Body a) =
         "(function() { var acc = []; for (var i = 0; i < a.getNumChildren(); i++) acc.push(a.getChild(i)); return acc })()"
         a
         (Json.Decode.list (Json.Decode.map Element Json.Decode.value))
+
+
+type_ : Element -> Task.Task JavaScript.Error String
+type_ (Element a) =
+    JavaScript.run
+        "a.getType().toString()"
+        a
+        Json.Decode.string
