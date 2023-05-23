@@ -40,3 +40,19 @@ name (Document a) =
         "a.getName()"
         a
         Json.Decode.string
+
+
+
+--
+
+
+type Body
+    = Body Json.Decode.Value
+
+
+body : Document -> Task.Task JavaScript.Error Body
+body (Document a) =
+    JavaScript.run
+        "a.getBody()"
+        a
+        (Json.Decode.map Body Json.Decode.value)
