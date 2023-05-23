@@ -38,6 +38,14 @@ byId a =
         )
 
 
+create : String -> Task.Task JavaScript.Error Spreadsheet
+create a =
+    JavaScript.run
+        "SpreadsheetApp.create(a)"
+        (Json.Encode.string a)
+        (Json.Decode.map Spreadsheet Json.Decode.value)
+
+
 name : Spreadsheet -> Task.Task JavaScript.Error String
 name (Spreadsheet a) =
     JavaScript.run
