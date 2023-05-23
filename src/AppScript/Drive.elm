@@ -43,6 +43,14 @@ folders (Folder a) =
         (Json.Decode.list (Json.Decode.map Folder Json.Decode.value))
 
 
+folderById : String -> Task.Task JavaScript.Error (Maybe Folder)
+folderById a =
+    JavaScript.run
+        "DriveApp.getFolderById(a)"
+        (Json.Encode.string a)
+        (Json.Decode.nullable (Json.Decode.map Folder Json.Decode.value))
+
+
 folderByName : Folder -> String -> Task.Task JavaScript.Error (Maybe Folder)
 folderByName (Folder a) name =
     JavaScript.run
