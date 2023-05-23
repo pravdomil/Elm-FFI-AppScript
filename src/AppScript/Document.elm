@@ -90,6 +90,18 @@ type_ (Element a) =
         Json.Decode.string
 
 
+toParagraph : Element -> Task.Task JavaScript.Error (Maybe Paragraph)
+toParagraph (Element a) =
+    JavaScript.run
+        "(a.getType() == DocumentApp.ElementType.PARAGRAPH ? a : null)"
+        a
+        (Json.Decode.oneOf
+            [ Json.Decode.null Nothing
+            , Json.Decode.map (Paragraph >> Just) Json.Decode.value
+            ]
+        )
+
+
 
 --
 
